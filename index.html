@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vibe Coding Journey</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .journey-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .journey-title {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #2c3e50;
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .journey-path {
+            position: relative;
+            padding: 20px 0;
+        }
+
+        .stage {
+            display: flex;
+            align-items: center;
+            margin-bottom: 60px;
+            position: relative;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .stage:nth-child(1) { animation-delay: 0.2s; }
+        .stage:nth-child(2) { animation-delay: 0.4s; }
+        .stage:nth-child(3) { animation-delay: 0.6s; }
+        .stage:nth-child(4) { animation-delay: 0.8s; }
+        .stage:nth-child(5) { animation-delay: 1.0s; }
+
+        .stage:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .stage-number {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+            flex-shrink: 0;
+            z-index: 2;
+            position: relative;
+        }
+
+        .stage-content {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 0 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            flex: 1;
+            border: 2px solid transparent;
+            background-clip: padding-box;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .stage-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            border-color: #667eea;
+        }
+
+        .stage-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .stage-project {
+            font-size: 1.1rem;
+            color: #667eea;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .stage-description {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+
+        .stage-learning {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            display: inline-block;
+        }
+
+        .connection-line {
+            position: absolute;
+            left: 50%;
+            top: 60px;
+            bottom: -60px;
+            width: 3px;
+            background: linear-gradient(to bottom, #667eea, #764ba2);
+            transform: translateX(-50%);
+            opacity: 0.3;
+            z-index: 1;
+        }
+
+        .stage:last-child .connection-line {
+            display: none;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .journey-title {
+                font-size: 2rem;
+            }
+
+            .journey-container {
+                padding: 20px;
+            }
+
+            .stage {
+                flex-direction: column !important;
+                text-align: center;
+                margin-bottom: 50px;
+            }
+
+            .stage-content {
+                margin: 15px 0 0 0;
+                width: 100%;
+            }
+
+            .stage-number {
+                width: 50px;
+                height: 50px;
+                font-size: 1rem;
+            }
+
+            .connection-line {
+                left: 25px;
+                transform: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .journey-title {
+                font-size: 1.6rem;
+            }
+
+            .journey-container {
+                padding: 15px;
+            }
+
+            .stage-title {
+                font-size: 1.2rem;
+            }
+
+            .stage-project {
+                font-size: 1rem;
+            }
+
+            .stage-content {
+                padding: 20px;
+            }
+        }
+
+        /* Glassmorphism effect */
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+
+        /* Pulse animation for stage numbers */
+        .stage-number::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            opacity: 0;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 0.7;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 0.3;
+            }
+            100% {
+                transform: scale(1.2);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="journey-container">
+        <h1 class="journey-title">My Vibe Coding Journey</h1>
+        
+        <div class="journey-path">
+            <div class="stage">
+                <div class="stage-number">1</div>
+                <div class="stage-content">
+                    <div class="stage-title">Prototyping</div>
+                    <div class="stage-project">What Should I Code?</div>
+                    <div class="stage-description">
+                        My first experiment with vibe coding - turning the age-old developer question into an AI-powered idea generator. Proof that conversations can become code faster than traditional development.
+                    </div>
+                    <div class="stage-learning">Learning: Rapid prototyping through conversation</div>
+                </div>
+                <div class="connection-line"></div>
+            </div>
+
+            <div class="stage">
+                <div class="stage-number">2</div>
+                <div class="stage-content">
+                    <div class="stage-title">Learning</div>  
+                    <div class="stage-project">Ask My Docs</div>
+                    <div class="stage-description">
+                        Diving deep into RAG (Retrieval-Augmented Generation) to build a document querying system. This marked my transition from simple tools to implementing real AI concepts.
+                    </div>
+                    <div class="stage-learning">Learning: Complex AI concepts made accessible</div>
+                </div>
+                <div class="connection-line"></div>
+            </div>
+
+            <div class="stage">
+                <div class="stage-number">3</div>
+                <div class="stage-content">
+                    <div class="stage-title">Problem-Solving</div>
+                    <div class="stage-project">Tab AI Assistant</div>
+                    <div class="stage-description">
+                        Solving my personal browser tab chaos with AI. This project showed how vibe coding excels at iterating on user experience and solving everyday problems.
+                    </div>
+                    <div class="stage-learning">Learning: Perfect for UX iteration & personal solutions</div>
+                </div>
+                <div class="connection-line"></div>
+            </div>
+
+            <div class="stage">
+                <div class="stage-number">4</div>
+                <div class="stage-content">
+                    <div class="stage-title">Innovation</div>
+                    <div class="stage-project">Spotify Podcast Agent</div>
+                    <div class="stage-description">
+                        Exploring Model Context Protocol (MCP) for agentic AI implementation. This project pushed me into cutting-edge AI research and community contribution.
+                    </div>
+                    <div class="stage-learning">Learning: Scaling to cutting-edge AI concepts</div>
+                </div>
+                <div class="connection-line"></div>
+            </div>
+
+            <div class="stage">
+                <div class="stage-number">5</div>
+                <div class="stage-content">
+                    <div class="stage-title">Mastery</div>
+                    <div class="stage-project">Agentic RAG Drive Monitor</div>
+                    <div class="stage-description">
+                        Combining everything learned into an intelligent monitoring solution. Represents the culmination of my vibe coding journey - from simple ideas to production-ready systems.
+                    </div>
+                    <div class="stage-learning">Learning: Enterprise-level solutions with rapid velocity</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add interactive hover effects
+        document.querySelectorAll('.stage-content').forEach(content => {
+            content.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-8px) scale(1.02)';
+            });
+            
+            content.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Add click interaction to expand details
+        document.querySelectorAll('.stage-content').forEach(content => {
+            content.addEventListener('click', function() {
+                // Add a subtle click animation
+                this.style.transform = 'scale(0.98)';
+                setTimeout(() => {
+                    this.style.transform = 'translateY(-5px) scale(1)';
+                }, 100);
+            });
+        });
+    </script>
+</body>
+</html>
